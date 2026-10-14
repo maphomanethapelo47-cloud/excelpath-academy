@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Practise English with ExcelPath Academy's interactive quizzes for Grades 8–12.">
+<title>ExcelPath Academy | English Quiz</title>
+<style>
+:root{--navy:#142c3a;--navy2:#1e4054;--teal:#19b9aa;--teal-dark:#087f78;--gold:#ffc83d;--ink:#21313b;--muted:#667782;--paper:#f4f7f8;--white:#fff;--line:#dce5e9;--good:#16794b;--good-bg:#e8f7ef;--bad:#a53232;--bad-bg:#fff0ef}
+*{box-sizing:border-box}
+body{margin:0;font-family:Inter,Segoe UI,Arial,sans-serif;color:var(--ink);background:var(--paper);line-height:1.55}
+header{background:linear-gradient(125deg,var(--navy),var(--navy2));color:white;padding:22px 18px 42px}
+.topbar{max-width:1000px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:14px}
+.brand{display:flex;align-items:center;gap:11px;font-weight:800;letter-spacing:.08em;font-size:14px}
+.logo{display:grid;place-items:center;width:42px;height:42px;border-radius:13px;background:var(--teal);color:var(--navy);font-size:22px}
+.tag{font-size:12px;color:#d7e7ed;border:1px solid #527080;border-radius:999px;padding:6px 10px}
+.hero{max-width:1000px;margin:32px auto 0}
+.eyebrow{color:#75eee0;text-transform:uppercase;letter-spacing:.16em;font-weight:800;font-size:12px}
+h1{font-size:clamp(30px,5vw,48px);line-height:1.1;margin:10px 0 12px;max-width:680px}
+.hero p{color:#d9e5e9;max-width:650px;margin:0;font-size:16px}
+main{max-width:1000px;margin:-20px auto 50px;padding:0 18px}
+.panel{background:white;border:1px solid var(--line);border-radius:22px;box-shadow:0 14px 40px rgba(20,44,58,.08);padding:clamp(18px,4vw,30px)}
+.controls{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+label{display:block;font-weight:750;font-size:13px;margin-bottom:7px}
+select{width:100%;padding:13px 14px;border:1px solid #cbd8de;border-radius:12px;background:white;color:var(--ink);font:inherit}
+.btn{border:0;border-radius:12px;padding:13px 18px;font:inherit;font-weight:800;cursor:pointer;transition:transform .12s,filter .12s}
+.btn:hover{filter:brightness(.97);transform:translateY(-1px)}
+.btn:focus-visible,select:focus-visible,.option:focus-visible{outline:3px solid #69dcd0;outline-offset:3px}
+.primary{background:var(--teal);color:var(--navy)}
+.secondary{background:#eaf1f4;color:var(--navy)}
+.full{width:100%;margin-top:18px}
+.note{font-size:12px;color:var(--muted);margin:13px 0 0}
+.hidden{display:none!important}
+.quiz-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px}
+.pill{background:#e9f8f6;color:var(--teal-dark);font-size:12px;font-weight:800;padding:6px 10px;border-radius:999px}
+.score-pill{font-size:13px;font-weight:800;background:#f1f4f6;padding:7px 11px;border-radius:999px;white-space:nowrap}
+.progress{height:8px;border-radius:99px;background:#e9eff2;overflow:hidden;margin-bottom:26px}
+.progress-fill{height:100%;width:0;background:var(--teal);transition:width .25s}
+.question-count{color:var(--muted);font-size:13px;font-weight:700}
+h2{font-size:clamp(21px,3.2vw,28px);line-height:1.25;margin:8px 0 20px;color:var(--navy)}
+.options{display:grid;gap:10px}
+.option{width:100%;display:flex;align-items:center;gap:12px;text-align:left;padding:14px;border:1px solid var(--line);border-radius:14px;background:white;color:var(--ink);font:inherit;cursor:pointer}
+.letter{width:30px;height:30px;display:grid;place-items:center;border-radius:9px;background:#edf3f5;font-size:13px;font-weight:900;flex-shrink:0}
+.option:hover:not(:disabled){border-color:var(--teal);background:#f4fffd}
+.option.correct{border-color:#8bd5ae;background:var(--good-bg)}
+.option.correct .letter{background:#bcebd0;color:var(--good)}
+.option.incorrect{border-color:#efaaa6;background:var(--bad-bg)}
+.option.incorrect .letter{background:#ffd8d5;color:var(--bad)}
+.option:disabled{cursor:default}
+.feedback{margin-top:16px;padding:14px 16px;border-radius:13px;font-size:14px}
+.feedback.good{background:var(--good-bg);color:#145e3b}
+.feedback.bad{background:var(--bad-bg);color:#812626}
+.feedback strong{display:block;margin-bottom:3px}
+.quiz-actions{display:flex;justify-content:space-between;gap:12px;margin-top:18px}
+.quiz-actions .btn{min-width:130px}
+.results{text-align:center;padding:15px 0 4px}
+.result-icon{width:76px;height:76px;border-radius:24px;background:#e6f8f5;color:var(--teal-dark);display:grid;place-items:center;font-size:34px;margin:0 auto 18px}
+.big-score{font-size:48px;font-weight:900;color:var(--navy);line-height:1.1;margin:12px 0}
+.result-message{max-width:520px;margin:0 auto 22px;color:var(--muted)}
+.review{margin-top:24px;text-align:left;border-top:1px solid var(--line);padding-top:20px}
+.review-item{padding:13px 0;border-bottom:1px solid var(--line)}
+.review-item strong{display:block;color:var(--navy);margin-bottom:4px}
+.review-item p{font-size:14px;color:var(--muted);margin:4px 0}
+footer{text-align:center;color:var(--muted);font-size:12px;padding:0 18px 32px}
+footer strong{color:var(--navy)}
+@media(max-width:620px){.controls{grid-template-columns:1fr}.topbar{align-items:flex-start}.tag{font-size:11px}.hero{margin-top:25px}.quiz-actions{flex-direction:column-reverse}.quiz-actions .btn{width:100%}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<header>
+  <div class="topbar">
+    <div class="brand"><div class="logo" aria-hidden="true">E</div><span>EXCELPATH ACADEMY</span></div>
+    <div class="tag">ENGLISH • GRADES 8–12</div>
+  </div>
+  <div class="hero">
+    <div class="eyebrow">Learn a little. Improve every day.</div>
+    <h1>Make English your strength.</h1>
+    <p>Build confidence with quick English practice. Choose your grade, answer each question and learn from instant feedback.</p>
+  </div>
+</header>
+<main>
+  <section id="setup" class="panel">
+    <div class="eyebrow" style="color:var(--teal-dark)">Your practice session</div>
+    <h2>Ready to test your English?</h2>
+    <div class="controls">
+      <div><label for="grade">Choose your grade</label>
+        <select id="grade">
+          <option value="8">Grade 8</option><option value="9">Grade 9</option><option value="10" selected>Grade 10</option><option value="11">Grade 11</option><option value="12">Grade 12</option>
+        </select>
+      </div>
+      <div><label for="topic">Choose a topic</label>
+        <select id="topic">
+          <option value="mixed">Mixed English skills</option>
+          <option value="grammar">Grammar and language</option>
+          <option value="vocabulary">Vocabulary and figures of speech</option>
+          <option value="comprehension">Reading comprehension</option>
+        </select>
+      </div>
+    </div>
+    <button id="start" class="btn primary full">Start my quiz →</button>
+    <p class="note">Free practice • No account required • Your score stays in this browser session.</p>
+  </section>
+
+  <section id="quiz" class="panel hidden" aria-live="polite">
+    <div class="quiz-head"><span class="pill" id="gradePill">GRADE 10</span><span class="score-pill" id="scorePill">Score: 0</span></div>
+    <div class="progress" aria-label="Quiz progress"><div class="progress-fill" id="progressFill"></div></div>
+    <div class="question-count" id="questionCount">QUESTION 1 OF 8</div>
+    <h2 id="questionText"></h2>
+    <div id="options" class="options"></div>
+    <div id="feedback" class="feedback hidden" role="status"></div>
+    <div class="quiz-actions">
+      <button id="quit" class="btn secondary">Exit quiz</button>
+      <button id="next" class="btn primary" disabled>Check answer</button>
+    </div>
+  </section>
+
+  <section id="results" class="panel hidden" aria-live="polite">
+    <div class="results">
+      <div class="result-icon" aria-hidden="true">✓</div>
+      <div class="eyebrow" style="color:var(--teal-dark)">Practice complete</div>
+      <h2 id="resultTitle">Well done!</h2>
+      <div class="big-score" id="finalScore">0 / 8</div>
+      <p id="resultMessage" class="result-message"></p>
+      <button id="retry" class="btn primary">Practise again</button>
+      <button id="change" class="btn secondary" style="margin-left:8px">Choose another grade</button>
+    </div>
+    <div class="review"><h2 style="font-size:20px">Answer review</h2><div id="reviewList"></div></div>
+  </section>
+</main>
+<footer><strong>EXCELPATH ACADEMY</strong><br>Independent English practice resource. Not an official examination paper or examination-board product.</footer>
+
+<script>
+const BANK = {
+  8: [
+    {topic:"grammar",q:"Choose the sentence with correct subject–verb agreement.",o:["The dogs runs across the field.","The dogs run across the field.","The dogs is running across the field.","The dogs has run across the field."],a:1,e:"The plural subject “dogs” takes the verb “run.”"},
+    {topic:"vocabulary",q:"In “The exhausted runner rested under a tree,” what does “exhausted” mean?",o:["Very excited","Very tired","Very confused","Very angry"],a:1,e:"“Exhausted” means extremely tired, which fits the runner needing rest."},
+    {topic:"grammar",q:"Which word is the adjective in “The bright moon lit the path”?",o:["moon","lit","bright","path"],a:2,e:"“Bright” describes the noun “moon,” so it is an adjective."},
+    {topic:"comprehension",q:"Read: “Lebo packed an umbrella because dark clouds gathered.” What can you reasonably infer?",o:["Lebo wanted to go swimming.","It might rain.","The sun was very hot.","Lebo lost the umbrella."],a:1,e:"Dark clouds and an umbrella suggest Lebo expects possible rain."},
+    {topic:"vocabulary",q:"Which sentence contains a simile?",o:["The classroom was a beehive.","The wind shouted.","Her smile was like sunshine.","Time is a thief."],a:2,e:"A simile compares things using “like” or “as.”"},
+    {topic:"grammar",q:"Choose the correct past-tense form: “Yesterday, we ___ to the library.”",o:["go","goed","went","gone"],a:2,e:"“Went” is the simple past tense of “go.”"},
+    {topic:"comprehension",q:"What is the main idea of a paragraph?",o:["A minor example","The central point","The longest word","The final punctuation mark"],a:1,e:"The main idea is the paragraph’s central message or point."},
+    {topic:"grammar",q:"Which punctuation mark usually ends a direct question?",o:["Full stop","Comma","Question mark","Colon"],a:2,e:"A direct question normally ends with a question mark."}
+  ],
+  9: [
+    {topic:"grammar",q:"Choose the sentence that uses the apostrophe correctly.",o:["The learners books were new.","The learner's books were new. (one learner)","The learners's books were new.","The learners book's were new."],a:1,e:"For one learner, the possessive form is “learner’s”."},
+    {topic:"vocabulary",q:"What does the prefix “mis-” usually suggest in a word such as “misunderstand”?",o:["Again","Not enough","Wrongly or badly","Before"],a:2,e:"The prefix “mis-” often means wrongly or incorrectly."},
+    {topic:"grammar",q:"Which option is a complex sentence?",o:["The bell rang, and learners left.","Although it was late, we continued studying.","Study hard.","The bright, sunny day."],a:1,e:"It combines a dependent clause (“Although it was late”) with an independent clause."},
+    {topic:"comprehension",q:"Read: “Nandi checked the timetable twice before leaving.” What does this suggest?",o:["She wanted to avoid a mistake.","She had no timetable.","She disliked travelling.","She was already late for certain."],a:0,e:"Checking twice suggests care and a wish to make sure the information is correct."},
+    {topic:"vocabulary",q:"“The instructions were vague.” What does “vague” mean?",o:["Very detailed","Unclear or not specific","Extremely loud","Easy to memorise"],a:1,e:"“Vague” describes something that lacks clarity or specific detail."},
+    {topic:"grammar",q:"Choose the correct reported speech: Thabo said, “I am tired.”",o:["Thabo said that I am tired.","Thabo said that he was tired.","Thabo says that he tired.","Thabo said he is tire."],a:1,e:"In standard reported speech in this context, “I am” changes to “he was.”"},
+    {topic:"comprehension",q:"A writer describes a problem and then suggests ways to solve it. What is the likely purpose?",o:["To confuse the reader","To explain and propose solutions","To list unrelated characters","To tell only a joke"],a:1,e:"Presenting a problem and possible solutions is an informative or persuasive structure."},
+    {topic:"vocabulary",q:"Which phrase is an example of personification?",o:["As cold as ice","A mountain of homework","The leaves danced in the wind","A red school bag"],a:2,e:"Leaves are given the human action of dancing."}
+  ],
+  10: [
+    {topic:"grammar",q:"Choose the sentence with correct subject–verb agreement.",o:["Neither of the answers are correct.","Neither of the answers is correct.","Neither answers is correct.","Neither of the answer are correct."],a:1,e:"“Neither” is treated as singular in this construction, so “is” is appropriate."},
+    {topic:"vocabulary",q:"In “The speaker’s tone was sarcastic,” what does “sarcastic” most nearly mean?",o:["Expressing sincere praise","Using remarks that mock or convey scorn","Speaking without emotion","Giving detailed instructions"],a:1,e:"Sarcasm often uses mocking or cutting remarks, sometimes saying the opposite of what is meant."},
+    {topic:"grammar",q:"Which sentence is in the passive voice?",o:["The committee approved the plan.","The learners wrote the test.","The plan was approved by the committee.","The committee is discussing the plan."],a:2,e:"The subject “plan” receives the action; “was approved” is passive voice."},
+    {topic:"comprehension",q:"Read: “Although the route was longer, the hikers chose it because it was safer.” Why did they choose the route?",o:["It was shorter.","It was safer.","It had no hills.","They were lost."],a:1,e:"The passage directly states that safety was the reason for their choice."},
+    {topic:"vocabulary",q:"Which figure of speech appears in “The city never sleeps”?",o:["Personification","Simile","Alliteration","Euphemism"],a:0,e:"The city is described as if it can sleep, a human action."},
+    {topic:"grammar",q:"Choose the correct conjunction: “She revised carefully, ___ she felt prepared for the test.”",o:["because","so","although","unless"],a:1,e:"“So” introduces the result of revising carefully."},
+    {topic:"comprehension",q:"A writer calls a plan “ambitious but achievable.” What does this suggest?",o:["The plan is impossible.","The plan is challenging but realistic.","The plan has already failed.","The plan needs no effort."],a:1,e:"“Ambitious” suggests a challenge; “achievable” means it can be done."},
+    {topic:"grammar",q:"Which sentence uses a semicolon correctly?",o:["I studied hard; I felt prepared.","I; studied hard I felt prepared.","I studied; hard, I felt prepared.","I studied hard,; I felt prepared."],a:0,e:"A semicolon can link two closely related independent clauses."}
+  ],
+  11: [
+    {topic:"grammar",q:"Which sentence maintains consistent tense?",o:["She opened the book and begins to read.","She opens the book and began to read.","She opened the book and began to read.","She had opened the book and begins to read."],a:2,e:"Both verbs are in the simple past tense: “opened” and “began.”"},
+    {topic:"vocabulary",q:"What does “ambivalent” mean?",o:["Having mixed or conflicting feelings","Being completely certain","Feeling physically exhausted","Showing no understanding"],a:0,e:"Ambivalent means having mixed feelings or uncertainty between opposing views."},
+    {topic:"comprehension",q:"A speaker presents evidence and addresses an opposing view. What is the speaker most likely trying to do?",o:["Persuade through reasoned argument","Describe a place only","Entertain with a rhyme","Give directions to a location"],a:0,e:"Evidence and engagement with opposing views are common features of a reasoned argument."},
+    {topic:"grammar",q:"Choose the correct form: “If I ___ more time, I would join the debate team.”",o:["have","had","will have","am having"],a:1,e:"The second conditional commonly uses “if” + past simple, followed by “would” + verb."},
+    {topic:"vocabulary",q:"In literary analysis, “irony” generally involves which feature?",o:["A clear list of instructions","A contrast between expectation and reality or meaning","A comparison using “like” only","The repetition of initial sounds only"],a:1,e:"Irony involves a meaningful contrast between what is expected and what occurs, or between words and intended meaning."},
+    {topic:"comprehension",q:"Read: “The policy reduced paper use, but staff reported longer delays.” Which summary is most balanced?",o:["The policy was entirely successful.","The policy had a benefit but also caused a difficulty.","Staff refused to use paper.","The policy changed nothing."],a:1,e:"A balanced summary includes both the reduction in paper use and the reported delays."},
+    {topic:"grammar",q:"Which option is a correctly punctuated direct quotation?",o:["Mina said “I will return tomorrow”.","Mina said, “I will return tomorrow.”","Mina said, I will return tomorrow.","Mina said “I will return tomorrow.”"],a:1,e:"The introductory clause is followed by a comma, and the full stop is placed inside the closing quotation mark in this style."},
+    {topic:"vocabulary",q:"What is the effect of a rhetorical question in an argument?",o:["It always requires a written answer.","It can prompt reflection and emphasise a point.","It removes the writer’s viewpoint.","It proves a claim without evidence."],a:1,e:"A rhetorical question is used to make readers think or to emphasise an argument, not necessarily to obtain an answer."}
+  ],
+  12: [
+    {topic:"grammar",q:"Which sentence has correct parallel structure?",o:["The course teaches learners to analyse, writing and discussion.","The course teaches learners analysis, to write and discussing.","The course teaches learners to analyse, to write and to discuss.","The course teaches learners analysing, to write and discussion."],a:2,e:"The repeated “to + verb” structure keeps the three items grammatically parallel."},
+    {topic:"vocabulary",q:"In an academic argument, what does “qualify a claim” mean?",o:["Make the claim more precise or limited","Repeat the claim more loudly","Remove all supporting evidence","Turn the claim into a question only"],a:0,e:"Qualifying a claim adds limits or conditions so that it is more accurate and nuanced."},
+    {topic:"comprehension",q:"A text acknowledges limitations in its own argument. What is a likely effect?",o:["It necessarily makes the argument invalid.","It may make the argument more balanced and credible.","It proves the writer has no position.","It replaces evidence with emotion."],a:1,e:"Acknowledging limitations can show fairness and awareness of complexity, which may strengthen credibility."},
+    {topic:"grammar",q:"Choose the correct sentence.",o:["Each of the proposals have advantages.","Each of the proposals has advantages.","Each of the proposal have advantages.","Each proposals has advantages."],a:1,e:"“Each” is singular here and takes “has.”"},
+    {topic:"vocabulary",q:"What is the most accurate meaning of “concession” in an argumentative essay?",o:["A point that acknowledges some merit in an opposing view","A repeated spelling error","A conclusion unrelated to the argument","A list of descriptive adjectives"],a:0,e:"A concession recognises a valid point made by the other side before continuing the argument."},
+    {topic:"comprehension",q:"Read: “The data is promising, though the sample was small and the study lasted only two weeks.” What is the writer’s stance?",o:["Unreserved certainty","Cautious optimism","Complete indifference","Open hostility"],a:1,e:"“Promising” is positive, while the limitations signal caution."},
+    {topic:"grammar",q:"Which sentence correctly uses a colon?",o:["Bring three items: a pen, a ruler and a notebook.","Bring: three items a pen, a ruler and a notebook.","Bring three: items, a pen, a ruler and a notebook.","Bring three items a pen: a ruler and a notebook."],a:0,e:"A colon can introduce a list after a complete clause."},
+    {topic:"vocabulary",q:"Which term describes language chosen to influence an audience’s feelings?",o:["Emotive language","Technical notation","Neutral labelling","Chronological order"],a:0,e:"Emotive language uses words with strong associations to influence the audience’s feelings."}
+  ]
+};
+let questions=[], index=0, score=0, chosen=null, answers=[];
+const $ = id => document.getElementById(id);
+function makeQuiz(){
+ const grade=$("grade").value, topic=$("topic").value;
+ questions=BANK[grade].filter(q=>topic==="mixed"||q.topic===topic);
+ // Keep the quiz compact but include every available question for a selected topic.
+ index=0;score=0;chosen=null;answers=[];
+ $("setup").classList.add("hidden");$("results").classList.add("hidden");$("quiz").classList.remove("hidden");
+ $("gradePill").textContent="GRADE "+grade;
+ renderQuestion();
+}
+function renderQuestion(){
+ const q=questions[index]; chosen=null;
+ $("questionCount").textContent=`QUESTION ${index+1} OF ${questions.length}`;
+ $("scorePill").textContent=`Score: ${score}`;
+ $("progressFill").style.width=`${index/questions.length*100}%`;
+ $("questionText").textContent=q.q;
+ $("options").innerHTML="";
+ $("feedback").className="feedback hidden";$("feedback").textContent="";
+ ["A","B","C","D"].forEach((letter,i)=>{
+  const b=document.createElement("button");b.className="option";b.type="button";
+  const span=document.createElement("span");span.className="letter";span.textContent=letter;
+  const txt=document.createElement("span");txt.textContent=q.o[i];
+  b.append(span,txt);b.addEventListener("click",()=>choose(i));$("options").appendChild(b);
+ });
+ $("next").textContent="Check answer";$("next").disabled=true;
+ $("progressFill").style.width=`${index/questions.length*100}%`;
+}
+function choose(i){
+ if(chosen!==null)return; chosen=i;
+ [...$("options").children].forEach((b,n)=>{b.disabled=true;if(n===questions[index].a)b.classList.add("correct");if(n===i&&i!==questions[index].a)b.classList.add("incorrect")});
+ $("next").disabled=false;$("next").textContent=index===questions.length-1?"See results":"Next question";
+ const q=questions[index], correct=i===q.a;if(correct)score++;
+ answers.push({q:q.q,selected:q.o[i],correct:q.o[q.a],ok:correct,explain:q.e});
+ $("scorePill").textContent=`Score: ${score}`;
+ $("feedback").className="feedback "+(correct?"good":"bad");
+ $("feedback").innerHTML=`<strong>${correct?"✓ That's right!":"Not quite — review the correct answer."}</strong>`;
+ const p=document.createElement("p");p.textContent=q.e;$("feedback").appendChild(p);
+}
+function nextQuestion(){if(chosen===null)return;if(index<questions.length-1){index++;renderQuestion()}else showResults()}
+function showResults(){
+ $("quiz").classList.add("hidden");$("results").classList.remove("hidden");
+ const total=questions.length,pct=Math.round(score/total*100);
+ $("finalScore").textContent=`${score} / ${total}`;
+ $("resultTitle").textContent=pct>=80?"Excellent work!":pct>=50?"Good effort — keep practising!":"Every attempt helps you improve.";
+ $("resultMessage").textContent=`You scored ${pct}%. Review the explanations below, then try again to strengthen your English skills.`;
+ $("progressFill").style.width="100%";
+ $("reviewList").innerHTML="";
+ answers.forEach((a,i)=>{const div=document.createElement("div");div.className="review-item";
+ const strong=document.createElement("strong");strong.textContent=`${i+1}. ${a.ok?"✓":"✗"} ${a.q}`;
+ const p1=document.createElement("p");p1.textContent=`Your answer: ${a.selected}`;
+ const p2=document.createElement("p");p2.textContent=`Correct answer: ${a.correct}`;
+ const p3=document.createElement("p");p3.textContent=a.explain;
+ div.append(strong,p1,p2,p3);$("reviewList").appendChild(div)});
+}
+$("start").addEventListener("click",makeQuiz);
+$("next").addEventListener("click",nextQuestion);
+$("quit").addEventListener("click",()=>{$("quiz").classList.add("hidden");$("setup").classList.remove("hidden")});
+$("retry").addEventListener("click",makeQuiz);
+$("change").addEventListener("click",()=>{$("results").classList.add("hidden");$("setup").classList.remove("hidden")});
+</script>
+</body>
+</html>
